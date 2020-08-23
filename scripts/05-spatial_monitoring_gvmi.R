@@ -171,7 +171,9 @@ levelplot(index,
 dev.off()
 
 #' TRIM FIGURE
-img <- magick::image_read(name) %>% image_trim()
+img <- magick::image_read(name, strip = TRUE) %>%
+  image_trim() %>%
+  image_border("white", "50x50")
 
 #' SAVE FIGURE
 image_write(img, path = name, format = "png")
