@@ -1,0 +1,12 @@
+data/*
+!data/rdata
+data/rdata/*
+!data/rdata/gvmi_avr_vls_Andes.RData
+
+.Rproj.user
+scripts/.Rhistory
+.Rhistory
+.Ruserdata
+\exports
+\info
+.RData
