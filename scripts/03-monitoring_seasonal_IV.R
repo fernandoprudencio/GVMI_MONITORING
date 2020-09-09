@@ -200,7 +200,8 @@ if (sprintf("data/rdata/%s_avr_vls_Andes.RData", k.index) %>% file.exists()) {
 
 #' MOVE FILES
 sapply(
-  lst.iv, FUN = file.move,
+  lst.iv,
+  FUN = file.move,
   sprintf("data/raster/index/%s_mod09a1/historical", k.index)
 )
 
@@ -277,9 +278,7 @@ ttl2 <- sprintf(
 )
 
 plt.iv <- ggplot(df, aes(x = date, y = value, group = type)) +
-  labs(
-    title = sprintf("%1$s\n%2$s", ttl1, ttl2)
-  ) +
+  labs(y = "GVMI") +
   geom_ribbon(
     aes(ymin = min.val, ymax = max.val),
     size = .2, fill = "gray", color = "gray", alpha = .1
@@ -312,11 +311,11 @@ plt.iv <- ggplot(df, aes(x = date, y = value, group = type)) +
     legend.background = element_rect(fill = "white", color = "black"),
     legend.margin = margin(3, 7, 7, 7),
     # legend.key.size = unit(.8, "cm"),
-    legend.key.width = unit(.9, "cm"),
-    legend.key.height = unit(.4, "cm"),
-    legend.position = c(0.82, 0.79),
+    legend.key.width = unit(1.6, "cm"),
+    legend.key.height = unit(1.1, "cm"),
+    legend.position = c(0.77, 0.78),
     legend.title = element_blank(),
-    legend.text = element_text(size = 12, family = "Source Sans Pro"),
+    legend.text = element_text(size = 15, family = "Source Sans Pro"),
     plot.title = element_text(size = 15, hjust = .5, family = "Source Sans Pro"),
     axis.text.x = element_text(
       size = 12, colour = "black", family = "Source Sans Pro",
@@ -326,7 +325,9 @@ plt.iv <- ggplot(df, aes(x = date, y = value, group = type)) +
       size = 13, face = "bold", family = "Source Sans Pro", color = "black"
     ),
     axis.title.x = element_blank(),
-    axis.title.y = element_blank(),
+    axis.title.y = element_text(
+      face = "bold", family = "Source Sans Pro", color = "black", size = 20
+    ),
     axis.ticks.x = element_line(color = "black"),
     axis.ticks.y = element_line(color = "black"),
     panel.grid = element_blank(),
@@ -337,24 +338,10 @@ plt.iv <- ggplot(df, aes(x = date, y = value, group = type)) +
     )
   )
 
-title.axis <- textGrob(
-  label = "GVMI", check.overlap = F,
-  x = unit(0, "lines"),
-  y = unit(-3, "lines"),
-  hjust = -.3,
-  gp = gpar(
-    fontsize = 18,
-    fontface = "bold",
-    col = "black"
-  )
-)
-
-plt <- gridExtra::arrangeGrob(plt.iv, top = title.axis)
-
 name <- sprintf("exports/%s_ssnl.png", k.index)
 
 ggsave(
-  plot = plt, name,
+  plot = plt.iv, name,
   width = 20, height = 15, units = "cm", dpi = 500
 )
 
