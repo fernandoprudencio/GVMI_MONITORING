@@ -284,14 +284,14 @@ plt.iv <- ggplot(df, aes(x = date, y = value, group = type)) +
     size = .2, fill = "gray", color = "gray", alpha = .1
   ) +
   geom_line(aes(linetype = type, color = type, size = type)) +
-  geom_point(aes(shape = type, color = type), size = 2) +
+  #geom_point(aes(shape = type, color = type), size = 2) +
   scale_linetype_manual(
-    values = c("dashed", "dashed", "solid"), labels = lbls
+    values = c("solid", "solid", "solid"), labels = lbls
   ) +
   scale_color_manual(
     values = c(
       rgb(237, 28, 36, maxColorValue = 255),
-      "gray", rgb(237, 28, 36, maxColorValue = 255)
+      "black", rgb(14, 149, 7, maxColorValue = 255)
     ),
     labels = lbls
   ) +
@@ -338,7 +338,7 @@ plt.iv <- ggplot(df, aes(x = date, y = value, group = type)) +
     )
   )
 
-name <- sprintf("exports/%s_ssnl.png", k.index)
+name <- sprintf("exports/%s_ssnl_V1.png", k.index)
 
 ggsave(
   plot = plt.iv, name,
