@@ -53,7 +53,7 @@ k.dep <- c(
 )
 
 k.yr <- as.character(readline(prompt = "\nEnter year: \n"))
-k.mth <- as.numeric(readline(prompt = "\nEnter month: \n"))
+k.mth <- as.numeric(readline(prompt = "\nEnter month in number: \n"))
 
 #' DEFINE COLOR PALETTE
 if (grepl(k.data, pattern = "anom")) {
