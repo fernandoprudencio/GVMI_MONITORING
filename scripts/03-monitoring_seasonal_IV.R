@@ -202,7 +202,8 @@ if (sprintf("data/rdata/%s_avr_vls_Andes.RData", k.index) %>% file.exists()) {
 sapply(
   lst.iv,
   FUN = file.move,
-  sprintf("data/raster/index/%s_mod09a1/historical", k.index)
+  sprintf("data/raster/index/%s_mod09a1/historical", k.index),
+  overwrite = T
 )
 
 #' PLOT OF SEASONAL BEHAVIOR OF VEGETATION INDEX BY 8 DAYS
@@ -291,7 +292,7 @@ plt.iv <- ggplot(df, aes(x = date, y = value, group = type)) +
   scale_color_manual(
     values = c(
       rgb(237, 28, 36, maxColorValue = 255),
-      "black", rgb(14, 149, 7, maxColorValue = 255)
+      "black", "blue"
     ),
     labels = lbls
   ) +
@@ -338,7 +339,7 @@ plt.iv <- ggplot(df, aes(x = date, y = value, group = type)) +
     )
   )
 
-name <- sprintf("exports/%s_ssnl_V1.png", k.index)
+name <- sprintf("exports/%s_ssnl.png", k.index)
 
 ggsave(
   plot = plt.iv, name,
