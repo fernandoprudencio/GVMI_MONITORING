@@ -30,8 +30,8 @@ spanish.months <- c(
 to.spanish <- spanish.months
 names(to.spanish) <- english.months
 
-translate.date <- function(date, output.lang = "es"){
-  if(output.lang == "es"){
+translate.date <- function(date, output.lang = "es") {
+  if (output.lang == "es") {
     str_replace_all(tolower(date), to.spanish)
   }
 }
@@ -42,9 +42,10 @@ translate.date <- function(date, output.lang = "es"){
 # (01)(02)(03)(04)(05)(06)(07)(08)(09)(10)(11)(12)(13)(14)(15)(16) - R NOMENCLATURE
 #'
 qaFilter <- function(band, qaband, type, filter) {
-  dataBIN <- sapply(DecToBin(c(1:65535)), FUN = function(x) {
-    binND(x, nbits = 16)
-  }) %>% as.character()
+  dataBIN <- str_pad(
+    DecToBin(c(1:65535)),
+    width = 16, side = "left", pad = "0"
+  )
   if (type == "mxd09a1") {
     dataBIN_df <- data.frame(bin = dataBIN) %>%
       mutate(dec = c(1:length(bin))) %>%
