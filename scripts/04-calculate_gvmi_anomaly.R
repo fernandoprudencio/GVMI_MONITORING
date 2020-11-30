@@ -30,7 +30,7 @@ source("scripts/functions.R")
 #'  climatology data
 lst.clim <- list.files(
   "data/raster/index/gvmi_mod09a1/climatology/norm",
-  pattern = "_10-", full.names = T
+  pattern = "_11-", full.names = T
 )
 #'  current data
 lst.curr <- list.files(
