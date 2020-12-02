@@ -70,44 +70,58 @@ foreach(i = 1:length(b1)) %dopar% {
   ndvi <- indexMODIS("ndvi",
     redBand = raster(b1[i]) / 10000,
     nirBand = raster(b2[i]) / 10000
-  ) %>% resample(grd.ref) %>% "*"(10000)
+  ) %>%
+    resample(grd.ref) %>%
+    "*"(10000)
 
   ndwi <- indexMODIS("ndwi",
     nirBand = raster(b2[i]) / 10000,
     swir3Band = raster(b7[i]) / 10000
-  ) %>% resample(grd.ref) %>% "*"(10000)
+  ) %>%
+    resample(grd.ref) %>%
+    "*"(10000)
 
   savi <- indexMODIS("savi",
     redBand = raster(b1[i]) / 10000,
     nirBand = raster(b2[i]) / 10000
-  ) %>% resample(grd.ref) %>% "*"(10000)
+  ) %>%
+    resample(grd.ref) %>%
+    "*"(10000)
 
   evi <- indexMODIS("evi",
     blueBand = raster(b3[i]) / 10000,
     redBand = raster(b1[i]) / 10000,
     nirBand = raster(b2[i]) / 10000
-  ) %>% resample(grd.ref) %>% "*"(10000)
+  ) %>%
+    resample(grd.ref) %>%
+    "*"(10000)
 
   ndii <- indexMODIS("ndii",
     nirBand = raster(b2[i]) / 10000,
     swir2Band = raster(b6[i]) / 10000
-  ) %>% resample(grd.ref) %>% "*"(10000)
+  ) %>%
+    resample(grd.ref) %>%
+    "*"(10000)
 
   gemi <- indexMODIS("gemi",
     redBand = raster(b1[i]) / 10000,
     nirBand = raster(b2[i]) / 10000
-  ) %>% resample(grd.ref) %>% "*"(10000)
+  ) %>%
+    resample(grd.ref) %>%
+    "*"(10000)
 
   gvmi <- indexMODIS("gvmi",
     nirBand = raster(b2[i]) / 10000,
     swir2Band = raster(b6[i]) / 10000
-  ) %>% resample(grd.ref) %>% "*"(10000)
+  ) %>%
+    resample(grd.ref) %>%
+    "*"(10000)
 
   date <- basename(b1[i]) %>%
     str_sub(26, 35)
 
   index <- c("ndvi", "ndwi", "savi", "evi", "ndii", "gemi", "gvmi")
-  
+
   for (j in index) {
     if (j == "ndvi") {
       name <- sprintf(
@@ -119,29 +133,29 @@ foreach(i = 1:length(b1)) %dopar% {
       name <- c(
         name,
         sprintf(
-        "data/raster/index/%s_%s_%s_%s.tif",
-        j, "mod09a1/MOD09A1.006_sur",
-        toupper(j), date
+          "data/raster/index/%s_%s_%s_%s.tif",
+          j, "mod09a1/MOD09A1.006_sur",
+          toupper(j), date
         )
       )
     }
   }
-  
-  storage.mode(ndvi[]) = "integer"
-  storage.mode(ndwi[]) = "integer"
-  storage.mode(savi[]) = "integer"
-  storage.mode(evi[]) = "integer"
-  storage.mode(ndii[]) = "integer"
-  storage.mode(gemi[]) = "integer"
-  storage.mode(gvmi[]) = "integer"
-  
-  writeRaster(ndvi, name[1], overwrite = T)
-  writeRaster(ndwi, name[2], overwrite = T)
-  writeRaster(savi, name[3], overwrite = T)
-  writeRaster(evi, name[4], overwrite = T)
-  writeRaster(ndii, name[5], overwrite = T)
-  writeRaster(gemi, name[6], overwrite = T)
-  writeRaster(gvmi, name[7], overwrite = T)
+
+  storage.mode(ndvi[]) <- "integer"
+  storage.mode(ndwi[]) <- "integer"
+  storage.mode(savi[]) <- "integer"
+  storage.mode(evi[]) <- "integer"
+  storage.mode(ndii[]) <- "integer"
+  storage.mode(gemi[]) <- "integer"
+  storage.mode(gvmi[]) <- "integer"
+
+  writeRaster(ndvi, name[1], overwrite = T, datatype = "INT2S")
+  writeRaster(ndwi, name[2], overwrite = T, datatype = "INT2S")
+  writeRaster(savi, name[3], overwrite = T, datatype = "INT2S")
+  writeRaster(evi, name[4], overwrite = T, datatype = "INT2S")
+  writeRaster(ndii, name[5], overwrite = T, datatype = "INT2S")
+  writeRaster(gemi, name[6], overwrite = T, datatype = "INT2S")
+  writeRaster(gvmi, name[7], overwrite = T, datatype = "INT2S")
 }
 
 #' END CLUSTER
