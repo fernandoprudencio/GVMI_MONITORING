@@ -356,7 +356,7 @@ image_write(img, path = name, format = "png")
 
 #' UPLOAD TO LAMAR SERVER
 path <- "/data/users/lamar/DATA/FIG_WEB_LAMAR/PROJECTS/FIRE_ANDES/GVMI"
-host <- "181.177.244.92"
+host <- "190.187.237.253"
 nam <- basename(name) %>% str_sub(1, -5)
 dte <- lst.iv[length(lst.iv)] %>%
   basename() %>%
