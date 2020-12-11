@@ -19,7 +19,7 @@ sapply(
   function(x) {
     is.there <- x %in% rownames(installed.packages())
     if (is.there == FALSE) {
-      install.packages(x)
+      install.packages(x, dependencies = T)
     }
   }
 )
