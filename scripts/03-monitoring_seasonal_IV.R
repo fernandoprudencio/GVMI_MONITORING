@@ -226,7 +226,7 @@ df <- tibble(
       c(
         yr.2000, yr.2001, yr.2002, yr.2003, yr.2004, yr.2006, yr.2007, yr.2008,
         yr.2009, yr.2011, yr.2012, yr.2013, yr.2014, yr.2015, yr.2017, yr.2018,
-        yr.2019
+        yr.2019, yr.2020
       ),
       na.rm = T
     ),
@@ -234,7 +234,7 @@ df <- tibble(
       c(
         yr.2000, yr.2001, yr.2002, yr.2003, yr.2004, yr.2005, yr.2006, yr.2007,
         yr.2008, yr.2009, yr.2010, yr.2011, yr.2012, yr.2013, yr.2014, yr.2015,
-        yr.2016, yr.2017, yr.2018, yr.2019
+        yr.2016, yr.2017, yr.2018, yr.2019, yr.2020
       ),
       na.rm = T
     ),
@@ -242,14 +242,14 @@ df <- tibble(
       c(
         yr.2000, yr.2001, yr.2002, yr.2003, yr.2004, yr.2005, yr.2006, yr.2007,
         yr.2008, yr.2009, yr.2010, yr.2011, yr.2012, yr.2013, yr.2014, yr.2015,
-        yr.2016, yr.2017, yr.2018, yr.2019
+        yr.2016, yr.2017, yr.2018, yr.2019, yr.2020
       ),
       na.rm = T
     )
   ) %>%
   ungroup() %>%
   dplyr::select(
-    oct.day, dry.mean, norm.mean, yr.2005, yr.2010, yr.2016, yr.2020, max.val,
+    oct.day, dry.mean, norm.mean, yr.2005, yr.2010, yr.2016, yr.2021, max.val,
     min.val
   ) %>%
   mutate(
@@ -263,13 +263,13 @@ df <- tibble(
     name.norm = "meanH"
   ) %>%
   dplyr::select(
-    yr.2020, dry.mean, norm.mean, max.val, min.val, date
+    yr.2021, dry.mean, norm.mean, max.val, min.val, date
   ) %>%
   gather(key = "type", value = "value", -date, -max.val, -min.val)
 
 lbls <- c(
   "promedio años\ncondiciones secas\n(2005, 2010, 2016)",
-  "promedio años\ncondiciones normales", "año 2020"
+  "promedio años\ncondiciones normales", "año 2021"
 )
 
 ttl1 <- "Evolución estacional del índice de humedad"
@@ -285,7 +285,7 @@ plt.iv <- ggplot(df, aes(x = date, y = value, group = type)) +
     size = .2, fill = "gray", color = "gray", alpha = .1
   ) +
   geom_line(aes(linetype = type, color = type, size = type)) +
-  #geom_point(aes(shape = type, color = type), size = 2) +
+  # geom_point(aes(shape = type, color = type), size = 2) +
   scale_linetype_manual(
     values = c("solid", "solid", "solid"), labels = lbls
   ) +

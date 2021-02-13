@@ -26,15 +26,20 @@ library(stringr)
 #' LOAD FUNCTIONS
 source("scripts/functions.R")
 
+#' DEFINE YEAR AND MONTH
+yr <- "2021"
+month <- "01"
+
 #' LIST OF RASTER DATA
 #'  climatology data
 lst.clim <- list.files(
   "data/raster/index/gvmi_mod09a1/climatology/norm",
-  pattern = "_12-", full.names = T
+  pattern = sprintf("_%1$s-", month), full.names = T
 )
 #'  current data
 lst.curr <- list.files(
-  "data/raster/index/gvmi_mod09a1/historical", full.names = T
+  "data/raster/index/gvmi_mod09a1/historical", full.names = T,
+  pattern = sprintf("doy%1$s", yr)
 )
 
 #' SELECT DATA TO CALCULATE AVERAGE CONDITIONS
@@ -52,8 +57,12 @@ writeRaster(
   grid.clim, "data/raster/gvmi_monit/gvmi_average.tif", overwrite = T
 )
 writeRaster(
-  grid.curr, "data/raster/gvmi_monit/gvmi_average_2020.tif", overwrite = T
+  grid.curr,
+  sprintf("data/raster/gvmi_monit/gvmi_average_%1$s.tif", yr),
+  overwrite = T
 )
 writeRaster(
-  grid.anom, "data/raster/gvmi_monit/anom_gvmi_2020.tif", overwrite = T
+  grid.anom,
+  sprintf("data/raster/gvmi_monit/anom_gvmi_%1$s.tif", yr),
+  overwrite = T
 )
