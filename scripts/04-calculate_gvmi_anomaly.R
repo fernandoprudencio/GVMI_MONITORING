@@ -28,7 +28,7 @@ source("scripts/functions.R")
 
 #' DEFINE YEAR AND MONTH
 yr <- "2021"
-month <- "01"
+month <- "02"
 
 #' LIST OF RASTER DATA
 #'  climatology data
@@ -53,9 +53,9 @@ grid.curr <- stack(lst.curr[id$id.curr]) %>% "*" (0.0001) %>% mean(na.rm = T)
 grid.anom <- grid.curr - grid.clim
 
 #' WRITE RASTER DATA
-writeRaster(
-  grid.clim, "data/raster/gvmi_monit/gvmi_average.tif", overwrite = T
-)
+# writeRaster(
+#   grid.clim, "data/raster/gvmi_monit/gvmi_average.tif", overwrite = T
+# )
 writeRaster(
   grid.curr,
   sprintf("data/raster/gvmi_monit/gvmi_average_%1$s.tif", yr),

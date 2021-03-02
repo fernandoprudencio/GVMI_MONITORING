@@ -88,7 +88,29 @@ for (i in 2000:year) {
       )
     )
   }
-  if (i == year & as.numeric(month) > 2) {
+  if (i == year & as.numeric(month) == 3 & as.numeric(day) < 6) {
+    ts <- c(
+      ts,
+      seq(as.Date(sprintf("%s-01-01", i)),
+        as.Date(sprintf("%s-02-26", i)),
+        by = "8 day"
+      )
+    )
+  }
+  if (i == year & as.numeric(month) == 3 & as.numeric(day) >= 6) {
+    ts <- c(
+      ts,
+      seq(as.Date(sprintf("%s-01-01", i)),
+          as.Date(sprintf("%s-02-26", i)),
+          by = "8 day"
+      ),
+      seq(as.Date(sprintf("%s-03-06", i)),
+          as.Date(sprintf("%s-%s-%s", i, month, day)),
+          by = "8 day"
+      )
+    )
+  }
+  if (i == year & as.numeric(month) > 3) {
     ts <- c(
       ts,
       seq(as.Date(sprintf("%s-01-01", i)),
